@@ -9,14 +9,14 @@ function twoSum($target, $nums) {
         
         $kk = array_search($vv, $pair);
         
-        if ($kk) {
+        if ($kk !== false) {
             return [$kk, $k];
         }
         $pair[$k] = $v;
     }
 }
 
-$target = 6;
+$target = 3;
 $nums = [2, 1, 5, 8];
 
 var_dump(twoSum($target, $nums));
