@@ -5,12 +5,12 @@ function twoSum($target, $nums) {
     
     foreach ($nums as $k => $v) {
         
-        $vv = $target - $v;
+        $diff = $target - $v;
         
-        $kk = array_search($vv, $pair);
+        $foundIndex = array_search($diff, $pair);
         
-        if ($kk !== false) {
-            return [$kk, $k];
+        if ($foundIndex !== false) {
+            return [$foundIndex, $k];
         }
         $pair[$k] = $v;
     }
