@@ -5,7 +5,7 @@ class ListNode
     public function __construct(public $val = 0, public $next = null){}
 }
 
-function hasCycle($head)
+function hasCycle(ListNode $head)
 {
     // 空リストまたは1つのノードしかない場合はサイクルなし
     if ($head == null || $head->next === null) {
@@ -32,16 +32,27 @@ function hasCycle($head)
     return false;
 }
 
-// サイクルのないリンクドリスト: 1->2->3->NULL
+// サイクルを作成する(true) or 作成しない(false)
+$createLink = true;
+
 $node1 = new ListNode(1);
 $node2 = new ListNode(2);
 $node3 = new ListNode(3);
+$node4 = new ListNode(4);
+
 $node1->next = $node2;
 $node2->next = $node3;
+$node3->next = $node4;
 
-echo "サイクルなし: " . (hasCycle($node1) ? "true" : "false") . "\n";
+// 作成しない場合: サイクルのないリンクドリスト: 1->2->3->4->NULL
+if ($createLink) {
+    // 1->2->3->4->1
+    $node4->next = $node1;
+}
 
-// サイクルのあるリンクドリスト: 1->2->3->1
-$node3->next = $node1; // 3が1を指すようにしてサイクルを作る
-
-echo "サイクルあり: " . (hasCycle($node1) ? "true" : "false") . "\n";
+$hasCycle = hasCycle($node1);
+if ($hasCycle) {
+    echo "cycle exists";
+} else {
+    echo "cycle not exists";
+}
