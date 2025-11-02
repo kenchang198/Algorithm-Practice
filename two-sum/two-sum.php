@@ -18,6 +18,7 @@ function twoSum($target, $nums) {
 
 /**
  * Better
+ * map 値をキー、インデックスを値にする
  */
 function twoSumBetter($target, $nums) {
     $map = [];
