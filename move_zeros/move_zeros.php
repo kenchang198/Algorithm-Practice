@@ -1,7 +1,7 @@
 <?php
-
 // 0以外の数字を左にもっていく方法
-function move_zeros($nums) {
+function move_zeros($nums)
+{
     $left = 0;
     foreach ($nums as $k => $num) {
         if ($num !== 0) {
@@ -17,6 +17,4 @@ function move_zeros($nums) {
 }
 
 $nums = [0, 1, 0, 3, 12];
-// $nums = [0, 0, 0, 0, 0, 0, 9, 0, 9];
-
 var_dump(move_zeros($nums));
