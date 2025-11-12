@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * array_search()は内部で線形探索（O(n)）を行います
+ * ループと組み合わせると、全体の計算量は最悪の場合O(n²)になります
+ * 大きな配列では著しくパフォーマンスが低下します
+ */
 function twoSum($target, $nums) {
     $pair = [];
     
@@ -34,5 +39,5 @@ function twoSumBetter($target, $nums) {
 $target = 3;
 $nums = [2, 1, 5, 8];
 
-var_dump(twoSum($target, $nums));
+// var_dump(twoSum($target, $nums));
 var_dump(twoSumBetter($target, $nums));
