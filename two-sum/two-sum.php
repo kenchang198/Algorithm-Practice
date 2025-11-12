@@ -6,7 +6,7 @@
  * 大きな配列では著しくパフォーマンスが低下します
  * @deprecated
  */
-function twoSum($target, $nums) {
+function twoSumWithArraySearch($target, $nums) {
     $pair = [];
     
     foreach ($nums as $k => $v) {
