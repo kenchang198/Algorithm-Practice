@@ -11,7 +11,7 @@
  * 
  * @param int[] $aliceSizes Aliceのキャンディーボックスのサイズ配列
  * @param int[] $bobSizes Bobのキャンディーボックスのサイズ配列
- * @return int[] 交換すべきキャンディーボックスのサイズ [Aliceの交換する値, Bobの交換する値]
+ * @return int[] LeetCode公式の回答形式: [Aliceが交換する値, Bobが交換する値]
  */
 function fairCandySwap(array $aliceSizes, array $bobSizes): array
 {
