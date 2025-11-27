@@ -6,6 +6,8 @@ LeetCode 888: Fair Candy Swap
 
 2 人の友人が 1 つずつキャンディーボックスを交換して、交換後に両者が同じ総量のキャンディーを持つようにする問題です。
 
+**回答形式**: 両者の交換する値が格納された配列 `[Aliceが交換する値, Bobが交換する値]` を返す。
+
 ## 問題例
 
 **入力:**
@@ -18,6 +20,7 @@ LeetCode 888: Fair Candy Swap
 - Alice のキャンディーボックスのうち 5 を、Bob のキャンディーボックスのうち 4 を交換
 - 交換後: Alice = 8 - 5 + 4 = 7, Bob = 6 - 4 + 5 = 7
 - 両者とも合計 7 になり、公平になる
+- **回答**: `[5, 4]`（LeetCode 公式の回答形式: `[Aliceが交換する値, Bobが交換する値]`）
 
 ## 解法のポイント
 
@@ -97,7 +100,7 @@ function fairCandySwap($aliceSizes, $bobSizes) {
     foreach ($aliceSizes as $aliceSize) {
         $bobSize = $aliceSize - $halfDiff;  // y = x - halfDiff
         if (isset($bobSet[$bobSize])) {
-            return [$aliceSize, $bobSize];
+            return [$aliceSize, $bobSize];  // LeetCode公式の回答形式: [Aliceが交換する値, Bobが交換する値]
         }
     }
 
@@ -132,3 +135,50 @@ Bob: [2, 4] (合計: 6)
 ## 参考リンク
 
 - [LeetCode 888: Fair Candy Swap](https://leetcode.com/problems/fair-candy-swap/description/)
+
+## 補足: 解が存在するための必要条件と実装への反映
+
+### 数学的な制約
+
+`diff = 2(x - y)` という関係式から、以下の重要な制約が導かれます:
+
+- `diff`は必ず**偶数**でなければなりません
+- `x`と`y`は整数（キャンディーボックスのサイズ）なので、`x - y`も整数です
+- したがって、`diff / 2`が整数になるためには、`diff`が偶数である必要があります
+- `diff`が奇数の場合、`diff / 2`は非整数となり、整数の`x`と`y`のペアが存在しないため、解は存在しません
+
+### 実装への反映
+
+LeetCode の制約では解が存在することが保証されているため、通常の実装ではこのチェックは必須ではありません。しかし、より堅牢な実装や、一般的な問題として解く場合は、以下のように早期リターンを追加することができます:
+
+```php
+function fairCandySwap($aliceSizes, $bobSizes) {
+    $aliceSum = array_sum($aliceSizes);
+    $bobSum = array_sum($bobSizes);
+    $diff = $aliceSum - $bobSum;
+
+    // 解が存在するための必要条件: diffは偶数でなければならない
+    if ($diff % 2 !== 0) {
+        return []; // 解なし
+    }
+
+    $halfDiff = $diff / 2;
+
+    // 以下、通常の実装と同じ
+    $bobSet = [];
+    foreach ($bobSizes as $size) {
+        $bobSet[$size] = true;
+    }
+
+    foreach ($aliceSizes as $aliceSize) {
+        $bobSize = $aliceSize - $halfDiff;
+        if (isset($bobSet[$bobSize])) {
+            return [$aliceSize, $bobSize];
+        }
+    }
+
+    return [];
+}
+```
+
+このチェックにより、解が存在しない場合に早期に処理を終了でき、不要な計算を避けることができます。
