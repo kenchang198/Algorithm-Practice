@@ -1,7 +1,7 @@
 <?php
 // $nums = [-1, 0, 3, 9, 11, 12];
 // $target = 9;
-$nums = [-1,0, 3 ,5,9,12];
+$nums = [-1,0,3,5,9,12];
 $target = 2;
 
 var_dump(main($nums, $target));
